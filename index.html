@@ -1,47 +1,1013 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Analytics Lab | Home</title>
-    <link rel="stylesheet" href="style.css">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LQ52LB6LFC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8" />
+  <title>IT030 — Live Demo</title>
 
-  gtag('config', 'G-LQ52LB6LFC');
-</script>
+  <!-- ============================================================
+    GA4 BASE TAG — This goes on every page of your site
+    Replace G-XXXXXXXXXX with your own Measurement ID
+  ============================================================ -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LQ52LB6LFC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-LQ52LB6LFC');
+  </script>
 
+  <style>
+    /* ── RESET & BASE ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --navy:    #0f3460;
+      --blue:    #16213e;
+      --accent:  #e94560;
+      --green:   #2ecc71;
+      --gold:    #f39c12;
+      --light:   #f4f6fb;
+      --white:   #ffffff;
+      --text:    #1a1a2e;
+      --muted:   #666;
+      --border:  #dde3f0;
+      --radius:  8px;
+      --shadow:  0 2px 12px rgba(15,52,96,0.10);
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── HEADER / NAV ─────────────────────────────────────── */
+    header {
+      background: var(--navy);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      color: var(--white);
+      font-size: 1.15rem;
+      font-weight: normal;
+      letter-spacing: 0.04em;
+    }
+
+    header h1 span {
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    /* ── NAV LINKS — ONCLICK TRACKING EXAMPLE ─────────────── */
+    nav a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      font-family: Arial, sans-serif;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    nav a:hover {
+      background: rgba(255,255,255,0.12);
+      color: var(--white);
+    }
+
+    /* ── MAIN LAYOUT ──────────────────────────────────────── */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* ── SECTION CARDS ────────────────────────────────────── */
+    .demo-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .demo-card h2 {
+      font-size: 1.25rem;
+      color: var(--navy);
+      margin-bottom: 6px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+    }
+
+    .demo-card .label {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+
+    .label-nav    { background: #e8f0fe; color: #1a56db; }
+    .label-js     { background: #fef3c7; color: #b45309; }
+    .label-filter { background: #ede9fe; color: #6d28d9; }
+
+    .demo-card p.desc {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ── CODE BLOCK ───────────────────────────────────────── */
+    .code-block {
+      background: #1e2235;
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+    }
+
+    .code-block pre {
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: #e2e8f0;
+    }
+
+    .code-block .cm  { color: #718096; }    /* comment */
+    .code-block .kw  { color: #63b3ed; }    /* keyword */
+    .code-block .st  { color: #68d391; }    /* string */
+    .code-block .fn  { color: #f6ad55; }    /* function */
+    .code-block .nm  { color: #fc8181; }    /* name/var */
+
+    /* ── BUTTONS ──────────────────────────────────────────── */
+    .btn {
+      display: inline-block;
+      padding: 11px 24px;
+      border: none;
+      border-radius: var(--radius);
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.15s;
+    }
+
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: var(--navy);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(15,52,96,0.25);
+    }
+
+    .btn-primary:hover { background: #0a2547; box-shadow: 0 4px 14px rgba(15,52,96,0.35); }
+
+    .btn-accent {
+      background: var(--accent);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(233,69,96,0.25);
+    }
+
+    .btn-accent:hover { background: #c73652; }
+
+    /* ── FEEDBACK STRIP ───────────────────────────────────── */
+    .feedback {
+      margin-top: 16px;
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      font-weight: bold;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f0f4ff;
+      color: var(--navy);
+      border: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+
+    .feedback.fired {
+      background: #d1fae5;
+      color: #065f46;
+      border-color: #6ee7b7;
+    }
+
+    /* ── COUNTER ──────────────────────────────────────────── */
+    #counter-display {
+      font-size: 3.5rem;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      color: var(--navy);
+      text-align: center;
+      padding: 20px 0 8px;
+      transition: transform 0.1s;
+    }
+
+    #counter-display.bump {
+      transform: scale(1.15);
+    }
+
+    #counter-message {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      color: var(--muted);
+      min-height: 26px;
+      margin-bottom: 16px;
+    }
+
+    .counter-controls {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    /* ── SKILLS LIST ──────────────────────────────────────── */
+    #skills-output {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      min-height: 44px;
+      margin-top: 4px;
+    }
+
+    #skills-output li {
+      background: #e8f0fe;
+      color: var(--navy);
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      font-weight: bold;
+      border: 1px solid #c7d7f9;
+      animation: popIn 0.2s ease;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.85); opacity: 0; }
+      to   { transform: scale(1);    opacity: 1; }
+    }
+
+    #skills-count {
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    /* ── FILTER ───────────────────────────────────────────── */
+    #filter-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    #filter-area label {
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: var(--navy);
+    }
+
+    #category-select {
+      padding: 9px 14px;
+      font-size: 0.95rem;
+      font-family: Arial, sans-serif;
+      border: 2px solid var(--navy);
+      border-radius: var(--radius);
+      background: var(--white);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    #items-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .item-card {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--navy);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      width: calc(50% - 7px);
+      font-family: Arial, sans-serif;
+      animation: popIn 0.2s ease;
+    }
+
+    .item-card h3 {
+      font-size: 0.95rem;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .item-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .item-tag {
+      display: inline-block;
+      padding: 2px 10px;
+      background: #e8f0fe;
+      color: var(--navy);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+
+    #filter-count {
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    /* ── GA4 LOG ──────────────────────────────────────────── */
+    #event-log {
+      background: #1e2235;
+      border-radius: 8px;
+      padding: 16px 18px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: #68d391;
+      min-height: 60px;
+      max-height: 160px;
+      overflow-y: auto;
+    }
+
+    #event-log .log-entry { margin-bottom: 4px; }
+    #event-log .log-time  { color: #718096; margin-right: 8px; }
+    #event-log .log-name  { color: #f6ad55; }
+    #event-log .log-params { color: #90cdf4; }
+
+    .log-label {
+      font-family: Arial, sans-serif;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    /* ── DIVIDER ──────────────────────────────────────────── */
+    .section-intro {
+      text-align: center;
+      padding: 8px 0 0;
+    }
+
+    .section-intro h2 {
+      font-size: 1.5rem;
+      font-family: Arial, sans-serif;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .section-intro p {
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── NAME MODAL ───────────────────────────────────────── */
+    #name-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 52, 96, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      backdrop-filter: blur(4px);
+    }
+
+    #name-modal {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 48px 48px 40px;
+      max-width: 460px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+      animation: modalIn 0.3s ease;
+    }
+
+    @keyframes modalIn {
+      from { transform: scale(0.9) translateY(20px); opacity: 0; }
+      to   { transform: scale(1)   translateY(0);    opacity: 1; }
+    }
+
+    #name-modal .modal-icon {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+    }
+
+    #name-modal h2 {
+      font-family: Arial, sans-serif;
+      font-size: 1.5rem;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    #name-modal p {
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    #name-modal p strong {
+      color: var(--navy);
+    }
+
+    #name-input {
+      width: 100%;
+      padding: 14px 18px;
+      font-size: 1.1rem;
+      font-family: Arial, sans-serif;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      outline: none;
+      text-align: center;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+      color: var(--text);
+    }
+
+    #name-input:focus {
+      border-color: var(--navy);
+    }
+
+    #name-input.shake {
+      animation: shake 0.3s ease;
+      border-color: var(--accent);
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25%       { transform: translateX(-8px); }
+      75%       { transform: translateX(8px); }
+    }
+
+    #name-submit {
+      width: 100%;
+      padding: 14px;
+      font-size: 1.05rem;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    #name-submit:hover  { background: #0a2547; }
+    #name-submit:active { transform: scale(0.98); }
+
+    /* ── STUDENT NAME BADGE in header ─────────────────────── */
+    #student-badge {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 5px 14px 5px 8px;
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      color: var(--white);
+    }
+
+    #student-badge .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.4; }
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <h1>Welcome to the Analytics Lab</h1>
-    </header>
+<!-- ============================================================
+  NAME MODAL — shown on page load, blocks interaction until
+  student enters their name. Name is then attached to all events.
+============================================================ -->
+<div id="name-overlay">
+  <div id="name-modal">
+    <div class="modal-icon">👋</div>
+    <h2>What's your name?</h2>
+    <p>Type your first name below. Every GA4 event you trigger will include <strong>your name</strong> as a parameter — watch for it in the live dashboard.</p>
+    <input type="text" id="name-input" placeholder="First name" maxlength="30" autocomplete="off" />
+    <button id="name-submit" onclick="submitName()">Join the Demo →</button>
+  </div>
+</div>
 
-    <main>
-        <section class="hero">
-            <div class="placeholder-img" style="width: 100%; height: 300px; background: #ccc; margin-bottom: 20px;"></div>
-            <h2>Data-Driven Decisions</h2>
-            <p>This site is designed to help you practice implementing GA4 tags and tracking user behavior.</p>
-            <button id="cta-button">Download Course Syllabus</button>
-        </section>
-    </main>
+<!-- ============================================================
+  HEADER + NAV
+============================================================ -->
+<header>
+  <h1>IT030 <span>Live Demo</span></h1>
+  <div id="student-badge">
+    <span class="badge-dot"></span>
+    <span id="badge-name"></span>
+  </div>
+  <nav>
+    <a href="#"
+       onclick="trackAndLog('nav_click', {link: 'home'})">
+      Home
+    </a>
+    <a href="#"
+       onclick="trackAndLog('nav_click', {link: 'about'})">
+      About
+    </a>
+    <a href="#"
+       onclick="trackAndLog('nav_click', {link: 'work'})">
+      Work
+    </a>
+    <a href="#"
+       onclick="trackAndLog('nav_click', {link: 'contact'})">
+      Contact
+    </a>
+  </nav>
+</header>
 
-    <footer>
-        <p>&copy; 2026 Web Development for Business</p>
-    </footer>
+<main>
 
+  <div class="section-intro">
+    <h2>GA4 Event Tracking — Live Demo</h2>
+    <p>Every interaction below fires a real GA4 event. Watch the Event Log at the bottom update in real time.</p>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+    DEMO 1 — SIMPLE BUTTON CLICK
+    The most basic onclick event. One button, one event.
+    This is the foundation everything else builds on.
+  ══════════════════════════════════════════════════════ -->
+  <div class="demo-card">
+    <span class="label label-nav">Demo 1 — Navigation Tracking</span>
+    <h2>onclick on Navigation Links</h2>
+    <p class="desc" id="student-greeting" style="background:#f0f4ff; border-radius:6px; padding:12px 14px; border-left: 4px solid var(--navy); font-weight:bold; color:var(--navy);">
+      Enter your name above to get started.
+    </p>
+
+    <p class="desc">
+      Every nav link in the header fires a <strong>nav_click</strong> event with a <strong>link</strong> parameter
+      telling GA4 which page was clicked — plus your <strong>student_name</strong>. Click any nav link above and watch the Event Log.
+    </p>
+
+    <div class="code-block"><pre><span class="cm"><!-- Add onclick to each nav link --></span>
+<span class="kw">&lt;a</span> href=<span class="st">"about.html"</span>
+   onclick=<span class="st">"gtag('event', 'nav_click', {'link': 'about'})"</span><span class="kw">&gt;</span>
+  About
+<span class="kw">&lt;/a&gt;</span></pre></div>
+
+    <p class="desc" style="margin-bottom:0">
+      The three parts of a GA4 event call:
+      <strong>'event'</strong> — always this word &nbsp;|&nbsp;
+      <strong>'nav_click'</strong> — your event name &nbsp;|&nbsp;
+      <strong>{'link': 'about'}</strong> — extra data sent with the event
+    </p>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+    DEMO 2 — COUNTER WITH CONDITIONAL
+    Mirrors Option B from the final: let variable,
+    onclick, if/else, DOM update
+  ══════════════════════════════════════════════════════ -->
+  <div class="demo-card">
+    <span class="label label-js">Demo 2 — Counter (onclick + if/else + DOM)</span>
+    <h2>Interaction Counter</h2>
+    <p class="desc">
+      Each click increments a <code>let</code> variable, updates the page, and fires a GA4 event.
+      When the count crosses a threshold, the message changes — and a different GA4 event fires.
+    </p>
+
+    <div class="code-block"><pre><span class="kw">let</span> <span class="nm">clickCount</span> = <span class="st">0</span>;
+
+<span class="kw">function</span> <span class="fn">handleClick</span>() {
+  <span class="nm">clickCount</span>++;
+
+  <span class="cm">// Update the page</span>
+  document.<span class="fn">getElementById</span>(<span class="st">'counter-display'</span>).textContent = <span class="nm">clickCount</span>;
+
+  <span class="cm">// Fire a GA4 event on every click</span>
+  <span class="fn">gtag</span>(<span class="st">'event'</span>, <span class="st">'button_click'</span>, {<span class="st">'count'</span>: <span class="nm">clickCount</span>});
+
+  <span class="cm">// Conditional: change message at threshold</span>
+  <span class="kw">if</span> (<span class="nm">clickCount</span> >= <span class="st">10</span>) {
+    document.<span class="fn">getElementById</span>(<span class="st">'counter-message'</span>).textContent = <span class="st">"You're dedicated!"</span>;
+    <span class="fn">gtag</span>(<span class="st">'event'</span>, <span class="st">'milestone_reached'</span>, {<span class="st">'milestone'</span>: <span class="st">'10_clicks'</span>});
+  } <span class="kw">else if</span> (<span class="nm">clickCount</span> >= <span class="st">5</span>) {
+    document.<span class="fn">getElementById</span>(<span class="st">'counter-message'</span>).textContent = <span class="st">"Keep going..."</span>;
+  } <span class="kw">else</span> {
+    document.<span class="fn">getElementById</span>(<span class="st">'counter-message'</span>).textContent = <span class="st">"Just getting started."</span>;
+  }
+}</pre></div>
+
+    <div id="counter-display">0</div>
+    <div id="counter-message">Just getting started.</div>
+
+    <div class="counter-controls">
+      <button class="btn btn-primary" onclick="handleClick()">Click Me</button>
+      <button class="btn btn-accent" onclick="resetCounter()">Reset</button>
+    </div>
+
+    <div class="feedback" id="counter-feedback">
+      Waiting for a click...
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+    DEMO 3 — SKILLS ARRAY RENDERED TO DOM
+    Mirrors Option A from the final: const array,
+    for loop, createElement, appendChild
+  ══════════════════════════════════════════════════════ -->
+  <div class="demo-card">
+    <span class="label label-js">Demo 3 — Array → DOM (for loop + createElement)</span>
+    <h2>Skills Rendered from a JavaScript Array</h2>
+    <p class="desc">
+      These skill tags are not written in HTML. A JavaScript array + a <code>for</code> loop
+      builds each one and appends it to the page. Clicking the button also fires a GA4 event.
+    </p>
+
+    <div class="code-block"><pre><span class="kw">const</span> <span class="nm">skills</span> = [<span class="st">'HTML'</span>, <span class="st">'CSS'</span>, <span class="st">'JavaScript'</span>, <span class="st">'GA4'</span>, <span class="st">'Flexbox'</span>];
+
+<span class="kw">function</span> <span class="fn">renderSkills</span>() {
+  <span class="kw">const</span> <span class="nm">list</span> = document.<span class="fn">getElementById</span>(<span class="st">'skills-output'</span>);
+  list.innerHTML = <span class="st">''</span>;  <span class="cm">// clear first</span>
+
+  <span class="kw">for</span> (<span class="kw">let</span> <span class="nm">i</span> = <span class="st">0</span>; <span class="nm">i</span> &lt; <span class="nm">skills</span>.length; <span class="nm">i</span>++) {
+    <span class="kw">const</span> <span class="nm">item</span> = document.<span class="fn">createElement</span>(<span class="st">'li'</span>);
+    <span class="nm">item</span>.textContent = <span class="nm">skills</span>[<span class="nm">i</span>];
+    <span class="nm">list</span>.<span class="fn">appendChild</span>(<span class="nm">item</span>);
+  }
+
+  <span class="fn">gtag</span>(<span class="st">'event'</span>, <span class="st">'skills_rendered'</span>, {<span class="st">'count'</span>: <span class="nm">skills</span>.length});
+  document.<span class="fn">getElementById</span>(<span class="st">'skills-count'</span>).textContent = skills.length + <span class="st">' skills loaded.'</span>;
+}</pre></div>
+
+    <button class="btn btn-primary" onclick="renderSkills()">Render My Skills</button>
+
+    <ul id="skills-output" style="margin-top:16px"></ul>
+    <p id="skills-count"></p>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+    DEMO 4 — INTEREST FILTER WITH SWITCH
+    Mirrors the final project exactly: array of objects,
+    switch statement, filter loop, DOM render
+  ══════════════════════════════════════════════════════ -->
+  <div class="demo-card">
+    <span class="label label-filter">Demo 4 — Interest Filter (switch + array of objects)</span>
+    <h2>Filter by Category — Your Final Project Feature</h2>
+    <p class="desc">
+      This is exactly what you will build for the final. A dropdown triggers a
+      <code>switch</code> statement that filters an array of objects and re-renders the page.
+      Each filter selection fires a GA4 event.
+    </p>
+
+    <div class="code-block"><pre><span class="kw">const</span> <span class="nm">items</span> = [
+  { <span class="st">name</span>: <span class="st">'Portfolio Site'</span>, <span class="st">category</span>: <span class="st">'Web'</span>,  <span class="st">description</span>: <span class="st">'HTML & CSS project'</span> },
+  { <span class="st">name</span>: <span class="st">'Python Script'</span>,  <span class="st">category</span>: <span class="st">'Code'</span>, <span class="st">description</span>: <span class="st">'Automates file sorting'</span> },
+  <span class="cm">// ... more items</span>
+];
+
+<span class="kw">function</span> <span class="fn">filterItems</span>(<span class="nm">category</span>) {
+  <span class="kw">switch</span> (<span class="nm">category</span>) {
+    <span class="kw">case</span> <span class="st">''</span>:
+      <span class="fn">renderItems</span>(<span class="nm">items</span>); <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="st">'Web'</span>:
+      <span class="fn">renderItems</span>(<span class="nm">items</span>.<span class="fn">filter</span>(<span class="nm">i</span> => <span class="nm">i</span>.category === <span class="st">'Web'</span>)); <span class="kw">break</span>;
+    <span class="cm">// ... more cases</span>
+    <span class="kw">default</span>:
+      <span class="fn">renderItems</span>(<span class="nm">items</span>);
+  }
+  <span class="fn">gtag</span>(<span class="st">'event'</span>, <span class="st">'filter_used'</span>, {<span class="st">'category'</span>: <span class="nm">category</span> || <span class="st">'all'</span>});
+}</pre></div>
+
+    <div id="filter-area">
+      <label for="category-select">Filter by category:</label>
+      <select id="category-select" onchange="filterItems(this.value)">
+        <option value="">All</option>
+        <option value="Web">Web</option>
+        <option value="Code">Code</option>
+        <option value="Design">Design</option>
+      </select>
+    </div>
+
+    <p id="filter-count"></p>
+    <div id="items-grid"></div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+    EVENT LOG — Shows every GA4 event fired on this page
+    Classroom tool so students can see events in real time
+    without switching to GA4 Realtime
+  ══════════════════════════════════════════════════════ -->
+  <div class="demo-card">
+    <span class="label label-nav">GA4 Event Log</span>
+    <h2>Events Fired This Session</h2>
+    <p class="desc">
+      Every GA4 event fired on this page appears below instantly.
+      In GA4 Realtime it takes ~30 seconds to appear — this log shows it immediately.
+    </p>
+    <div class="log-label">Live event stream</div>
+    <div id="event-log">Waiting for events...</div>
+  </div>
+
+</main>
+
+<footer>
+  IT030 — Web Development &amp; Analytics &nbsp;·&nbsp; GA4 ID: G-LQ52LB6LFC
+</footer>
+
+
+<script>
+  // ============================================================
+  //  STUDENT NAME — set when modal is submitted
+  //  Attached as a parameter to every GA4 event fired
+  // ============================================================
+
+  let studentName = '';
+
+  // Allow Enter key to submit
+  document.getElementById('name-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') submitName();
+  });
+
+  // Auto-focus the input
+  document.getElementById('name-input').focus();
+
+  function submitName() {
+    const input = document.getElementById('name-input');
+    const val = input.value.trim();
+
+    if (!val) {
+      input.classList.add('shake');
+      setTimeout(() => input.classList.remove('shake'), 400);
+      input.focus();
+      return;
+    }
+
+    studentName = val;
+
+    // Hide modal
+    document.getElementById('name-overlay').style.display = 'none';
+
+    // Show badge in header
+    const badge = document.getElementById('student-badge');
+    badge.style.display = 'flex';
+    document.getElementById('badge-name').textContent = studentName;
+
+    // Fire a GA4 join event with their name
+    gtag('event', 'student_joined', { student_name: studentName });
+
+    // Update the greeting in Demo 1
+    document.getElementById('student-greeting').textContent =
+      'Hello, ' + studentName + '! Your name will appear in GA4 when you click the nav links below.';
+  }
+
+
+  // ============================================================
+  //  EVENT LOG — intercepts gtag() calls so we can show them
+  //  on the page without waiting for GA4 Realtime
+  // ============================================================
+
+  const originalGtag = window.gtag;
+  const logEl = document.getElementById('event-log');
+  let firstEvent = true;
+
+  window.gtag = function() {
+    originalGtag.apply(this, arguments);
+
+    if (arguments[0] === 'event') {
+      const eventName   = arguments[1];
+      const eventParams = arguments[2] || {};
+
+      if (firstEvent) { logEl.innerHTML = ''; firstEvent = false; }
+
+      const now = new Date();
+      const time = now.getHours().toString().padStart(2,'0') + ':' +
+                   now.getMinutes().toString().padStart(2,'0') + ':' +
+                   now.getSeconds().toString().padStart(2,'0');
+
+      const paramsStr = Object.entries(eventParams)
+        .map(([k,v]) => k + ': "' + v + '"')
+        .join(', ');
+
+      const entry = document.createElement('div');
+      entry.className = 'log-entry';
+      entry.innerHTML =
+        '<span class="log-time">' + time + '</span>' +
+        '<span class="log-name">' + eventName + '</span>' +
+        (paramsStr ? '<span class="log-params"> { ' + paramsStr + ' }</span>' : '');
+
+      logEl.appendChild(entry);
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+  };
+
+
+  // ============================================================
+  //  DEMO 1 — NAV TRACKING — includes student name
+  // ============================================================
+
+  function trackAndLog(eventName, params) {
+    params.student_name = studentName;
+    gtag('event', eventName, params);
+    showFeedback('counter-feedback', eventName + ' fired → link: "' + params.link + '" | student: "' + studentName + '"');
+  }
+
+
+  // ============================================================
+  //  DEMO 2 — COUNTER — includes student name
+  // ============================================================
+
+  let clickCount = 0;
+
+  function handleClick() {
+    clickCount++;
+
+    const display = document.getElementById('counter-display');
+    display.textContent = clickCount;
+    display.classList.add('bump');
+    setTimeout(() => display.classList.remove('bump'), 150);
+
+    gtag('event', 'button_click', { count: clickCount, student_name: studentName });
+
+    const msg = document.getElementById('counter-message');
+    if (clickCount >= 10) {
+      msg.textContent = "You're dedicated, " + studentName + "! 🎯";
+      if (clickCount === 10) {
+        gtag('event', 'milestone_reached', { milestone: '10_clicks', student_name: studentName });
+      }
+    } else if (clickCount >= 5) {
+      msg.textContent = 'Keep going, ' + studentName + '...';
+    } else {
+      msg.textContent = 'Just getting started.';
+    }
+
+    showFeedback('counter-feedback', 'button_click fired → count: ' + clickCount + ' | student: "' + studentName + '"');
+  }
+
+  function resetCounter() {
+    clickCount = 0;
+    document.getElementById('counter-display').textContent = '0';
+    document.getElementById('counter-message').textContent = 'Just getting started.';
+    showFeedback('counter-feedback', 'Counter reset');
+    gtag('event', 'counter_reset', { student_name: studentName });
+  }
+
+  function showFeedback(id, msg) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = '✓  ' + msg;
+    el.classList.add('fired');
+    clearTimeout(el._t);
+    el._t = setTimeout(() => el.classList.remove('fired'), 3000);
+  }
+
+
+  // ============================================================
+  //  DEMO 3 — SKILLS ARRAY RENDER — includes student name
+  // ============================================================
+
+  const skills = ['HTML', 'CSS', 'JavaScript', 'GA4', 'Flexbox', 'GitHub'];
+
+  function renderSkills() {
+    const list = document.getElementById('skills-output');
+    list.innerHTML = '';
+
+    for (let i = 0; i < skills.length; i++) {
+      const item = document.createElement('li');
+      item.textContent = skills[i];
+      list.appendChild(item);
+    }
+
+    document.getElementById('skills-count').textContent = skills.length + ' skills loaded.';
+    gtag('event', 'skills_rendered', { count: skills.length, student_name: studentName });
+  }
+
+
+  // ============================================================
+  //  DEMO 4 — INTEREST FILTER — includes student name
+  // ============================================================
+
+  const items = [
+    { name: 'Portfolio Site',   category: 'Web',    description: 'Multi-page HTML & CSS project' },
+    { name: 'GA4 Dashboard',    category: 'Web',    description: 'Analytics tracking setup' },
+    { name: 'Python Sorter',    category: 'Code',   description: 'Automates file organization' },
+    { name: 'JS Sandbox',       category: 'Code',   description: 'Variables, loops, DOM practice' },
+    { name: 'Brand Identity',   category: 'Design', description: 'Logo and color system' },
+    { name: 'Resume Layout',    category: 'Design', description: 'Clean typographic layout' },
+  ];
+
+  function renderItems(list) {
+    const grid = document.getElementById('items-grid');
+    grid.innerHTML = '';
+
+    for (let i = 0; i < list.length; i++) {
+      const card = document.createElement('div');
+      card.className = 'item-card';
+      card.innerHTML =
+        '<h3>' + list[i].name        + '</h3>' +
+        '<p>'  + list[i].description + '</p>'  +
+        '<span class="item-tag">' + list[i].category + '</span>';
+      grid.appendChild(card);
+    }
+
+    document.getElementById('filter-count').textContent = list.length + ' items shown';
+  }
+
+  function filterItems(category) {
+    switch (category) {
+      case '':
+        renderItems(items);
+        break;
+      case 'Web':
+        const web = [];
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].category === 'Web') { web.push(items[i]); }
+        }
+        renderItems(web);
+        break;
+      case 'Code':
+        const code = [];
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].category === 'Code') { code.push(items[i]); }
+        }
+        renderItems(code);
+        break;
+      case 'Design':
+        const design = [];
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].category === 'Design') { design.push(items[i]); }
+        }
+        renderItems(design);
+        break;
+      default:
+        renderItems(items);
+    }
+
+    gtag('event', 'filter_used', { category: category || 'all', student_name: studentName });
+  }
+
+  // Load on page open
+  filterItems('');
+
+</script>
 </body>
 </html>
